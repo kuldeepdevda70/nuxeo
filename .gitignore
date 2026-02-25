@@ -1,0 +1,55 @@
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+
+
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'VERSION', defaultValue: 'master', description: 'Git Tag or Branch')
+    }
+
+    stages {
+
+        stage('Checkout Terraform Code') {
+            steps {
+                git branch: 'master',
+                    url: 'https://github.com/kuldeepdevda70/terraform'
+            }
+        }
+
+        stage('Terraform Init') {
+            steps {
+                dir('template/stack') {
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform Plan') {
+            steps {
+                dir('template/stack') {
+                    sh """
+                    terraform plan \
+                    -var="repo_version=${params.VERSION}"
+                    """
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                dir('template/stack') {
+                    sh """
+                    terraform apply \
+                    -var="repo_version=${params.VERSION}" \
+                    -auto-approve
+                    """
+                }
+            }
+        }
+    }
+}
