@@ -11,6 +11,6 @@ key_name      = "test"
 
 ansible_repo = "https://github.com/kuldeepdevda70/EC2.git"
 
-blue_version  = "v2.0.1"
-green_version = "v2.0.1"
-active_color  = "green"
+blue_version  = "v2.2.3"
+green_version = "v2.2.3"
+active_color  = "blue"

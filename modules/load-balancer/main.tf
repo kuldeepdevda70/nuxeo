@@ -16,6 +16,10 @@ resource "aws_lb_target_group" "blue_tg" {
     path     = "/"
     protocol = "HTTP"
   }
+   tags = {
+    Environment = "blue"
+    App         = "react"
+  }
 }
 
 resource "aws_lb_target_group" "green_tg" {
@@ -27,6 +31,11 @@ resource "aws_lb_target_group" "green_tg" {
   health_check {
     path     = "/"
     protocol = "HTTP"
+  }
+
+  tags = {
+    Environment = "green"
+    App         = "react"
   }
 }
 

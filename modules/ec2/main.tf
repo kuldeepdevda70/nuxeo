@@ -68,11 +68,18 @@ cd app
 
 git checkout ${var.blue_version}
 
-ansible-playbook -i localhost, -c local playbook.yml \
-  --extra-vars "target_group_arn=${var.blue_target_group_arn}"
+ansible-playbook -i localhost, -c local playbook.yml 
 
 EOF
 )
+tag_specifications {
+  resource_type = "instance"
+
+  tags = {
+    Environment = "blue"
+  }
+}
+
 }
 
 resource "aws_launch_template" "green_lt" {
@@ -100,17 +107,24 @@ pip3 install boto3 botocore
 ansible-galaxy collection install community.aws
 
 cd /home/ubuntu
-
 git clone ${var.ansible_repo} app
 cd app
 
 git checkout ${var.green_version}
 
-ansible-playbook -i localhost, -c local playbook.yml \
-  --extra-vars "target_group_arn=${var.green_target_group_arn}"
+ansible-playbook -i localhost, -c local playbook.yml 
+  
 
 EOF
 )
+
+tag_specifications {
+  resource_type = "instance"
+
+  tags = {
+    Environment = "green"
+  }
+}
 }
 
 
