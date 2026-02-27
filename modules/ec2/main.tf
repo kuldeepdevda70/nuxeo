@@ -68,7 +68,7 @@ cd app
 
 git checkout ${var.blue_version}
 
-ansible-playbook -i localhost, -c local playbook.yml 
+ansible-playbook -i localhost, -c local playbook.yml -e "target_group_arn=${var.blue_target_group_arn}"
 
 EOF
 )
@@ -112,7 +112,7 @@ cd app
 
 git checkout ${var.green_version}
 
-ansible-playbook -i localhost, -c local playbook.yml 
+ansible-playbook -i localhost, -c local playbook.yml -e "target_group_arn=${var.green_target_group_arn}"
   
 
 EOF
