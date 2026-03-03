@@ -7,7 +7,7 @@ public_subnets = [
 
 ami           = "ami-01f79b1e4a5c64257"
 instance_type = "t3.micro"
-key_name      = "test"
+key_name      = "tested"
 
 ansible_repo = "https://github.com/kuldeepdevda70/EC2.git"
 
